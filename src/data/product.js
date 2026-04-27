@@ -1,4 +1,6 @@
-export const items = [
+export const LOCAL_PRODUCTS_STORAGE_KEY = "items";
+
+export const DEFAULT_PRODUCTS = [
   {
     id: 1,
     title: "Wireless Headphones",
@@ -96,3 +98,6 @@ export const items = [
     ],
   },
 ];
+
+// Backwards-compatible export for older imports.
+export const items = DEFAULT_PRODUCTS;

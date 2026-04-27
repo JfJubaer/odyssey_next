@@ -3,6 +3,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import {
+  buildLocalProduct,
+  getLocalProducts,
+  saveLocalProducts,
+} from "@/lib/products";
 
 export default function AddItemPage() {
   const router = useRouter();
@@ -12,12 +17,12 @@ export default function AddItemPage() {
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
-    shortDescription: "",
-    fullDescription: "",
     category: "",
     price: "",
-    date: "",
-    imageUrl: "",
+    rating: "4.0",
+    image: "",
+    description: "",
+    specsText: "",
   });
 
   useEffect(() => {
@@ -50,12 +55,18 @@ export default function AddItemPage() {
       ? "Price must be greater than 0."
       : "";
 
-  const imageUrlError =
-    formData.imageUrl.length > 0 && !/^https?:\/\//.test(formData.imageUrl)
-      ? "Image URL should start with http:// or https://"
+  const ratingError =
+    formData.rating.length > 0 &&
+    (Number(formData.rating) < 0 || Number(formData.rating) > 5)
+      ? "Rating must be between 0 and 5."
       : "";
 
-  const hasInlineErrors = Boolean(priceError || imageUrlError);
+  const imageError =
+    formData.image.length > 2
+      ? "Use a short icon/emoji value for image."
+      : "";
+
+  const hasInlineErrors = Boolean(priceError || ratingError || imageError);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,25 +77,25 @@ export default function AddItemPage() {
 
     setSubmitting(true);
 
-    const newItem = {
+    const newItem = buildLocalProduct({
       id: Date.now(),
       ...formData,
       userEmail: user.email,
-    };
+    });
 
-    const existingItems = JSON.parse(localStorage.getItem("items")) || [];
-    localStorage.setItem("items", JSON.stringify([...existingItems, newItem]));
+    const existingItems = getLocalProducts();
+    saveLocalProducts([...existingItems, newItem]);
 
     setSuccess("Item added successfully.");
 
     setFormData({
       title: "",
-      shortDescription: "",
-      fullDescription: "",
       category: "",
       price: "",
-      date: "",
-      imageUrl: "",
+      rating: "4.0",
+      image: "",
+      description: "",
+      specsText: "",
     });
 
     setTimeout(() => {
@@ -132,23 +143,12 @@ export default function AddItemPage() {
             </div>
 
             <div>
-              <label className="mb-1.5 block text-sm font-medium">Short Description</label>
-              <input
-                type="text"
-                name="shortDescription"
-                value={formData.shortDescription}
-                onChange={handleChange}
-                required
-                placeholder="Short product summary"
-                className="bw-input"
-              />
-            </div>
-
-            <div>
-              <label className="mb-1.5 block text-sm font-medium">Full Description</label>
+              <label className="mb-1.5 block text-sm font-medium">
+                Description
+              </label>
               <textarea
-                name="fullDescription"
-                value={formData.fullDescription}
+                name="description"
+                value={formData.description}
                 onChange={handleChange}
                 required
                 rows="5"
@@ -190,31 +190,53 @@ export default function AddItemPage() {
               </div>
 
               <div>
-                <label className="mb-1.5 block text-sm font-medium">Date</label>
+                <label className="mb-1.5 block text-sm font-medium">Rating</label>
                 <input
-                  type="date"
-                  name="date"
-                  value={formData.date}
+                  type="number"
+                  step="0.1"
+                  min="0"
+                  max="5"
+                  name="rating"
+                  value={formData.rating}
                   onChange={handleChange}
                   required
                   className="bw-input"
                 />
+                {ratingError && (
+                  <p className="mt-1 text-xs text-neutral-600">{ratingError}</p>
+                )}
               </div>
             </div>
 
             <div>
-              <label className="mb-1.5 block text-sm font-medium">Image URL (optional)</label>
+              <label className="mb-1.5 block text-sm font-medium">
+                Image Icon (optional)
+              </label>
               <input
-                type="url"
-                name="imageUrl"
-                value={formData.imageUrl}
+                type="text"
+                name="image"
+                value={formData.image}
                 onChange={handleChange}
-                placeholder="https://example.com/product.jpg"
+                placeholder="e.g. 💡"
                 className="bw-input"
               />
-              {imageUrlError && (
-                <p className="mt-1 text-xs text-neutral-600">{imageUrlError}</p>
+              {imageError && (
+                <p className="mt-1 text-xs text-neutral-600">{imageError}</p>
               )}
+            </div>
+
+            <div>
+              <label className="mb-1.5 block text-sm font-medium">
+                Specifications (optional)
+              </label>
+              <input
+                type="text"
+                name="specsText"
+                value={formData.specsText}
+                onChange={handleChange}
+                placeholder="Comma separated, e.g. LED, USB-C, Portable"
+                className="bw-input"
+              />
             </div>
 
             <button

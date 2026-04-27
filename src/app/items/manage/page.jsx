@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { getLocalProducts, saveLocalProducts } from "@/lib/products";
 
 export default function ManageItemsPage() {
   const router = useRouter();
@@ -18,14 +19,14 @@ export default function ManageItemsPage() {
   }, [user, loading, router]);
 
   useEffect(() => {
-    const savedItems = JSON.parse(localStorage.getItem("items")) || [];
+    const savedItems = getLocalProducts();
     setItems(savedItems);
   }, []);
 
   const handleDelete = (id) => {
     const remainingItems = items.filter((item) => item.id !== id);
     setItems(remainingItems);
-    localStorage.setItem("items", JSON.stringify(remainingItems));
+    saveLocalProducts(remainingItems);
   };
 
   if (loading) {
@@ -80,7 +81,7 @@ export default function ManageItemsPage() {
               <span>Title</span>
               <span>Category</span>
               <span>Price</span>
-              <span>Date</span>
+              <span>Rating</span>
               <span>Added By</span>
               <span className="text-right">Actions</span>
             </div>
@@ -94,7 +95,7 @@ export default function ManageItemsPage() {
                   <div>
                     <p className="font-semibold text-neutral-900">{item.title}</p>
                     <p className="text-sm text-neutral-600 md:hidden">
-                      {item.shortDescription}
+                      {item.description}
                     </p>
                   </div>
 
@@ -108,8 +109,8 @@ export default function ManageItemsPage() {
                   </div>
 
                   <div className="text-sm text-neutral-700">
-                    <span className="font-medium md:hidden">Date: </span>
-                    {item.date}
+                    <span className="font-medium md:hidden">Rating: </span>
+                    {item.rating}/5
                   </div>
 
                   <div className="truncate text-sm text-neutral-700">

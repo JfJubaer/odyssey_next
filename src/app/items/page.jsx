@@ -1,71 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-
-const items = [
-  {
-    id: 1,
-    title: "Wireless Headphones",
-    category: "Electronics",
-    price: 99,
-    rating: 4.8,
-    image: "🎧",
-    description: "High-quality wireless headphones with noise cancellation.",
-  },
-  {
-    id: 2,
-    title: "Smart Watch",
-    category: "Electronics",
-    price: 149,
-    rating: 4.6,
-    image: "⌚",
-    description: "Track your fitness, calls, and notifications easily.",
-  },
-  {
-    id: 3,
-    title: "Running Shoes",
-    category: "Fashion",
-    price: 79,
-    rating: 4.5,
-    image: "👟",
-    description: "Comfortable running shoes for daily workouts.",
-  },
-  {
-    id: 4,
-    title: "Backpack",
-    category: "Fashion",
-    price: 49,
-    rating: 4.3,
-    image: "🎒",
-    description: "Stylish and durable backpack for travel or study.",
-  },
-  {
-    id: 5,
-    title: "Coffee Maker",
-    category: "Home",
-    price: 120,
-    rating: 4.7,
-    image: "☕",
-    description: "Brew fresh coffee at home with one-touch control.",
-  },
-  {
-    id: 6,
-    title: "Desk Lamp",
-    category: "Home",
-    price: 35,
-    rating: 4.2,
-    image: "💡",
-    description: "Modern LED desk lamp with adjustable brightness.",
-  },
-];
+import { useMemo, useState } from "react";
+import { getLocalProducts, getMergedProducts } from "@/lib/products";
 
 export default function ItemsPage() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [price, setPrice] = useState("All");
+  const [localProducts] = useState(() => getLocalProducts());
 
-  const filteredItems = items.filter((item) => {
+  const allItems = useMemo(() => getMergedProducts(localProducts), [localProducts]);
+
+  const filteredItems = allItems.filter((item) => {
     const matchesSearch =
       item.title.toLowerCase().includes(search.toLowerCase()) ||
       item.description.toLowerCase().includes(search.toLowerCase());
@@ -109,6 +56,7 @@ export default function ItemsPage() {
             <option value="Electronics">Electronics</option>
             <option value="Fashion">Fashion</option>
             <option value="Home">Home</option>
+            <option value="Accessories">Accessories</option>
           </select>
 
           <select
@@ -149,9 +97,7 @@ export default function ItemsPage() {
               </div>
 
               <div className="mt-5 flex items-center justify-between">
-                <p className="text-lg font-bold text-neutral-900">
-                  ${item.price}
-                </p>
+                <p className="text-lg font-bold text-neutral-900">${item.price}</p>
 
                 <Link
                   href={`/items/${item.id}`}

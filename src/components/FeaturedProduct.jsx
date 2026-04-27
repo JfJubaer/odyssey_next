@@ -1,43 +1,7 @@
 import Link from "next/link";
+import { DEFAULT_PRODUCTS } from "@/data/product";
 
-const products = [
-  {
-    id: 1,
-    title: "Wireless Headphones",
-    category: "Electronics",
-    price: 99,
-    rating: 4.8,
-    image: "🎧",
-    description: "High-quality wireless headphones with noise cancellation.",
-  },
-  {
-    id: 2,
-    title: "Smart Watch",
-    category: "Electronics",
-    price: 149,
-    rating: 4.6,
-    image: "⌚",
-    description: "Track your fitness, calls, and notifications easily.",
-  },
-  {
-    id: 3,
-    title: "Running Shoes",
-    category: "Fashion",
-    price: 79,
-    rating: 4.5,
-    image: "👟",
-    description: "Comfortable running shoes for daily workouts.",
-  },
-  {
-    id: 4,
-    title: "Backpack",
-    category: "Fashion",
-    price: 49,
-    rating: 4.3,
-    image: "🎒",
-    description: "Stylish and durable backpack for travel or study.",
-  },
-];
+const featuredProducts = DEFAULT_PRODUCTS.slice(0, 4);
 
 export default function FeaturedProducts() {
   return (
@@ -51,12 +15,12 @@ export default function FeaturedProducts() {
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((product) => (
+          {featuredProducts.map((product) => (
             <article
               key={product.id}
               className="surface-card hover-lift fade-in overflow-hidden"
             >
-              <div className="h-48 flex items-center justify-center bg-blue-50 text-7xl">
+              <div className="h-48 flex items-center justify-center bg-neutral-100 text-7xl">
                 {product.image}
               </div>
 

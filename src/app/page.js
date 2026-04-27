@@ -1,14 +1,18 @@
 import Image from "next/image";
+import Navbar from "./components/Nav";
+import Hero from "./components/Hero";
+import FeaturedProducts from "./components/FeaturedProduct";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
     <div>
-      <h1 className="text-4xl font-bold text-center mt-10">
-        Welcome to Odyssey App
-      </h1>
-      <p className="text-center mt-4 text-gray-600">
-        Your journey starts here.
-      </p>
+      <Navbar />
+      <main>
+        <Hero />
+        <FeaturedProducts />
+      </main>
+      <Footer />
     </div>
   );
 }

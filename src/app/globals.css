@@ -27,6 +27,11 @@ body {
   background: var(--bw-bg);
 }
 
+.section-shell {
+  padding: 2rem 1rem;
+  background: var(--bw-bg);
+}
+
 .page-container {
   width: 100%;
   max-width: 72rem;
@@ -193,6 +198,10 @@ body {
 
 @media (min-width: 768px) {
   .page-shell {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .section-shell {
     padding: 2.5rem 1.5rem;
   }
 }

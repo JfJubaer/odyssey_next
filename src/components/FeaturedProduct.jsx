@@ -41,7 +41,7 @@ const products = [
 
 export default function FeaturedProducts() {
   return (
-    <section className="page-shell pt-1 sm:pt-2">
+    <section className="section-shell pt-0 sm:pt-0">
       <div className="page-container section-stack">
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500">

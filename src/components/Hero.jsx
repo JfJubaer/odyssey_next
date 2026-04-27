@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="page-shell">
+    <section className="section-shell pb-2 sm:pb-3">
       <div className="page-container">
         <div className="surface-soft fade-in mx-auto max-w-4xl px-6 py-14 text-center sm:px-10">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">

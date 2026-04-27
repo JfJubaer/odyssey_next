@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 const items = [
@@ -154,9 +155,12 @@ export default function ItemsPage() {
               <div className="flex items-center justify-between">
                 <p className="text-lg font-bold text-blue-600">${item.price}</p>
 
-                <button className="rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 transition">
+                <Link
+                  href={`/items/${item?.id}`}
+                  className="rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 transition"
+                >
                   View Details
-                </button>
+                </Link>
               </div>
             </div>
           ))}

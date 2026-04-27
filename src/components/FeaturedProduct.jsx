@@ -1,63 +1,97 @@
-import Image from "next/image";
+import Link from "next/link";
 
 const products = [
   {
     id: 1,
-    name: "Wireless Headphones",
-    price: "$99",
-    image: "https://images.unsplash.com/photo-1518441902110-72f44b2c1b2f",
+    title: "Wireless Headphones",
+    category: "Electronics",
+    price: 99,
+    rating: 4.8,
+    image: "🎧",
+    description: "High-quality wireless headphones with noise cancellation.",
   },
   {
     id: 2,
-    name: "Smart Watch",
-    price: "$149",
-    image: "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b",
+    title: "Smart Watch",
+    category: "Electronics",
+    price: 149,
+    rating: 4.6,
+    image: "⌚",
+    description: "Track your fitness, calls, and notifications easily.",
   },
   {
     id: 3,
-    name: "Gaming Mouse",
-    price: "$59",
-    image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7",
+    title: "Running Shoes",
+    category: "Fashion",
+    price: 79,
+    rating: 4.5,
+    image: "👟",
+    description: "Comfortable running shoes for daily workouts.",
   },
   {
     id: 4,
-    name: "Bluetooth Speaker",
-    price: "$79",
-    image: "https://images.unsplash.com/photo-1585386959984-a4155224a1ad",
+    title: "Backpack",
+    category: "Fashion",
+    price: 49,
+    rating: 4.3,
+    image: "🎒",
+    description: "Stylish and durable backpack for travel or study.",
   },
 ];
 
 export default function FeaturedProducts() {
   return (
-    <section className="py-20">
+    <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-12">
-          Featured Products
-        </h2>
+        <div className="text-center mb-12">
+          <p className="text-blue-600 font-semibold mb-2">
+            Featured Collection
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+            Popular Products
+          </h2>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((product) => (
             <div
               key={product.id}
-              className="border rounded-lg overflow-hidden hover:shadow-lg transition"
+              className="group rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition"
             >
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={600}
-                height={400}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                className="h-48 w-full object-cover"
-              />
+              <div className="h-48 flex items-center justify-center bg-blue-50 text-7xl">
+                {product.image}
+              </div>
 
-              <div className="p-4">
-                <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
+              <div className="p-5">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-xs font-medium bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
+                    {product.category}
+                  </span>
+                  <span className="text-sm text-yellow-600">
+                    ⭐ {product.rating}
+                  </span>
+                </div>
 
-                <p className="text-gray-500 mb-4">{product.price}</p>
+                <h3 className="font-bold text-lg mb-2 text-gray-900">
+                  {product.title}
+                </h3>
 
-                <button className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
-                  View Product
-                </button>
+                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                  {product.description}
+                </p>
+
+                <div className="flex items-center justify-between">
+                  <p className="text-xl font-bold text-blue-600">
+                    ${product.price}
+                  </p>
+
+                  <Link
+                    href={`/items/${product.id}`}
+                    className="rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 transition"
+                  >
+                    View Details
+                  </Link>
+                </div>
               </div>
             </div>
           ))}

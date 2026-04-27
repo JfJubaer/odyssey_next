@@ -2,28 +2,33 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-10">
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+    <footer className="border-t border-neutral-200 bg-neutral-50 py-10">
+      <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-3">
         <div>
-          <h2 className="text-xl font-bold text-white mb-3">ShopNest</h2>
-          <p>Your one-stop shop for the latest gadgets and accessories.</p>
+          <h2 className="text-lg font-bold text-neutral-900">ShopNest</h2>
+          <p className="mt-3 text-sm leading-6 text-neutral-600">
+            A clean shopping experience focused on speed, clarity, and secure
+            sign-in.
+          </p>
         </div>
 
         <div>
-          <h3 className="font-semibold text-white mb-3">Quick Links</h3>
-          <ul className="space-y-2">
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-neutral-900">
+            Quick Links
+          </h3>
+          <ul className="mt-3 grid gap-2 text-sm">
             <li>
               <Link
                 href="/"
-                className="hover:text-white"
+                className="bw-link bw-link-focus"
               >
                 Home
               </Link>
             </li>
             <li>
               <Link
-                href="/products"
-                className="hover:text-white"
+                href="/items"
+                className="bw-link bw-link-focus"
               >
                 Products
               </Link>
@@ -31,34 +36,36 @@ export default function Footer() {
             <li>
               <Link
                 href="/about"
-                className="hover:text-white"
+                className="bw-link bw-link-focus"
               >
                 About
               </Link>
             </li>
             <li>
               <Link
-                href="/contact"
-                className="hover:text-white"
+                href="/login"
+                className="bw-link bw-link-focus"
               >
-                Contact
+                Login
               </Link>
             </li>
           </ul>
         </div>
 
         <div>
-          <h3 className="font-semibold text-white mb-3">Follow Us</h3>
-          <div className="flex gap-4">
-            <span className="hover:text-white cursor-pointer">Facebook</span>
-            <span className="hover:text-white cursor-pointer">Twitter</span>
-            <span className="hover:text-white cursor-pointer">Instagram</span>
-          </div>
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-neutral-900">
+            Built With
+          </h3>
+          <ul className="mt-3 grid gap-2 text-sm text-neutral-600">
+            <li>Next.js App Router</li>
+            <li>Tailwind CSS</li>
+            <li>Firebase Auth</li>
+          </ul>
         </div>
       </div>
 
-      <div className="text-center text-sm mt-10 border-t border-gray-700 pt-6">
-        © 2026 ShopNest. All rights reserved.
+      <div className="mx-auto mt-8 w-full max-w-7xl border-t border-neutral-200 px-4 pt-6 text-center text-xs text-neutral-500 sm:px-6">
+        Copyright 2026 ShopNest. All rights reserved.
       </div>
     </footer>
   );

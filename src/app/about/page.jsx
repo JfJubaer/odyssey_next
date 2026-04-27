@@ -2,84 +2,72 @@ import Image from "next/image";
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-gray-50 py-16 px-6">
-      <section className="max-w-6xl mx-auto">
-        {/* Title */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            About ShopNest
-          </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            ShopNest is a modern e-commerce demo application built with Next.js
-            and Firebase authentication. It demonstrates a clean UI, responsive
-            layout, dynamic routing, and protected pages.
+    <section className="page-shell">
+      <div className="page-container section-stack">
+        <header className="mx-auto max-w-3xl text-center">
+          <h1 className="title-xl">About ShopNest</h1>
+          <p className="mt-4 text-base leading-7 text-neutral-600">
+            ShopNest is a modern e-commerce demo built with Next.js and Firebase
+            authentication. The experience focuses on clean structure,
+            responsive behavior, and consistent interaction patterns.
           </p>
-        </div>
+        </header>
 
-        {/* Content */}
-        <div className="grid md:grid-cols-2 gap-10 items-center bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-          {/* Image */}
-          <div className="flex justify-center">
+        <div className="surface-card grid items-center gap-8 p-6 sm:p-8 md:grid-cols-2">
+          <div className="overflow-hidden rounded-xl border border-neutral-200">
             <Image
               src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a"
               alt="Ecommerce shopping"
-              width={500}
-              height={350}
-              className="rounded-xl object-cover"
+              width={600}
+              height={420}
+              className="h-full w-full object-cover"
             />
           </div>
 
-          {/* Description */}
-          <div>
-            <h2 className="text-2xl font-bold mb-4 text-gray-900">
-              Our Mission
-            </h2>
-
-            <p className="text-gray-600 mb-4">
-              Our goal is to create a smooth and user-friendly online shopping
-              experience. ShopNest allows users to browse products, search and
-              filter items, and view detailed product information through a
-              modern and responsive interface.
+          <div className="space-y-4">
+            <h2 className="title-lg">Our Mission</h2>
+            <p className="text-sm leading-7 text-neutral-600">
+              We aim to deliver a smooth shopping flow where users can browse,
+              filter, and inspect products without visual clutter.
             </p>
-
-            <p className="text-gray-600 mb-4">
-              The application is built using modern technologies including
-              Next.js App Router, Tailwind CSS for styling, and Firebase
-              authentication for secure user login.
+            <p className="text-sm leading-7 text-neutral-600">
+              The stack combines Next.js App Router for structure, Tailwind CSS
+              for maintainable styling, and Firebase Authentication for secure
+              user sessions.
             </p>
-
-            <p className="text-gray-600">
-              This project demonstrates how a scalable front-end structure can
-              be built while maintaining clean design, accessibility, and
-              performance.
+            <p className="text-sm leading-7 text-neutral-600">
+              This project emphasizes accessibility, reliable responsive layouts,
+              and a simple black-and-white interface system.
             </p>
           </div>
         </div>
 
-        {/* Extra Section */}
-        <div className="mt-14 grid md:grid-cols-3 gap-8 text-center">
-          <div className="bg-white p-6 rounded-xl shadow-sm border">
-            <h3 className="text-xl font-bold mb-2">Modern UI</h3>
-            <p className="text-gray-600 text-sm">
-              Clean and responsive interface built with Tailwind CSS.
+        <div className="grid gap-5 md:grid-cols-3">
+          <article className="surface-card hover-lift p-6">
+            <h3 className="text-lg font-semibold">Consistent UI</h3>
+            <p className="mt-2 text-sm leading-6 text-neutral-600">
+              Shared tokens and reusable classes keep spacing, typography, and
+              controls uniform.
             </p>
-          </div>
+          </article>
 
-          <div className="bg-white p-6 rounded-xl shadow-sm border">
-            <h3 className="text-xl font-bold mb-2">Dynamic Routing</h3>
-            <p className="text-gray-600 text-sm">
-              Product pages use Next.js dynamic routes for better scalability.
+          <article className="surface-card hover-lift p-6">
+            <h3 className="text-lg font-semibold">Dynamic Routing</h3>
+            <p className="mt-2 text-sm leading-6 text-neutral-600">
+              Product details use dynamic routes with server rendering for clear
+              and scalable page structure.
             </p>
-          </div>
+          </article>
 
-          <div className="bg-white p-6 rounded-xl shadow-sm border">
-            <h3 className="text-xl font-bold mb-2">Authentication</h3>
-            <p className="text-gray-600 text-sm">
-              Secure login system powered by Firebase Authentication.
+          <article className="surface-card hover-lift p-6">
+            <h3 className="text-lg font-semibold">Authentication</h3>
+            <p className="mt-2 text-sm leading-6 text-neutral-600">
+              Protected workflows for adding and managing products are handled
+              through Firebase Auth.
             </p>
-          </div>
+          </article>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
   );
 }

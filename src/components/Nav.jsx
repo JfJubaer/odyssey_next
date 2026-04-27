@@ -7,96 +7,92 @@ import { useAuth } from "@/context/AuthContext";
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const { user, logoutUser } = useAuth();
 
   const handleLogout = async () => {
     await logoutUser();
     setDropdownOpen(false);
+    setMenuOpen(false);
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white shadow">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <nav className="sticky top-0 z-50 border-b border-neutral-200 bg-white/95 backdrop-blur">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
         <Link
           href="/"
-          className="text-2xl font-bold text-blue-600"
+          className="bw-link bw-link-focus text-xl font-bold tracking-tight"
         >
           ShopNest
         </Link>
 
-        <div className="hidden md:flex gap-8 items-center">
+        <div className="hidden items-center gap-6 md:flex">
           <Link
             href="/"
-            className="hover:text-blue-600 transition"
+            className="bw-link bw-link-focus text-sm font-medium"
           >
             Home
           </Link>
           <Link
             href="/items"
-            className="hover:text-blue-600 transition"
+            className="bw-link bw-link-focus text-sm font-medium"
           >
             Products
           </Link>
           <Link
             href="/about"
-            className="hover:text-blue-600 transition"
+            className="bw-link bw-link-focus text-sm font-medium"
           >
             About
-          </Link>
-          <Link
-            href="/dashboard"
-            className="hover:text-blue-600 transition"
-          >
-            Dashboard
           </Link>
 
           {!user ? (
             <Link
               href="/login"
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+              className="bw-btn bw-link-focus px-4 py-2 text-sm"
             >
               Login
             </Link>
           ) : (
             <div className="relative">
               <button
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100"
+                onClick={() => setDropdownOpen((prev) => !prev)}
+                className="bw-btn-ghost bw-link-focus flex items-center gap-2 px-3 py-2 text-sm"
               >
-                <span className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full border border-neutral-300 bg-neutral-100 text-xs font-semibold text-neutral-800">
                   {user.email?.charAt(0).toUpperCase()}
                 </span>
-                <span>{user.email}</span>
+                <span className="max-w-40 truncate">{user.email}</span>
               </button>
 
               {dropdownOpen && (
-                <div className="absolute right-0 mt-3 w-64 bg-white border rounded-xl shadow-lg p-4">
-                  <p className="text-sm text-gray-500">Logged in as</p>
-                  <p className="font-semibold text-gray-900 truncate mb-4">
+                <div className="surface-card fade-in absolute right-0 mt-3 w-64 p-3">
+                  <p className="text-xs text-neutral-500">Logged in as</p>
+                  <p className="mb-3 truncate text-sm font-semibold text-neutral-900">
                     {user.email}
                   </p>
 
-                  <Link
-                    href="/items/add"
-                    className="block px-3 py-2 rounded-lg hover:bg-gray-100"
-                  >
-                    Add Product
-                  </Link>
-
-                  <Link
-                    href="/items/manage"
-                    className="block px-3 py-2 rounded-lg hover:bg-gray-100"
-                  >
-                    Manage Products
-                  </Link>
-
-                  <button
-                    onClick={handleLogout}
-                    className="w-full text-left px-3 py-2 rounded-lg text-red-600 hover:bg-red-50 mt-2"
-                  >
-                    Logout
-                  </button>
+                  <div className="grid gap-1">
+                    <Link
+                      href="/items/add"
+                      className="bw-link bw-link-focus rounded-lg px-3 py-2 text-sm hover:bg-neutral-100"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Add Product
+                    </Link>
+                    <Link
+                      href="/items/manage"
+                      className="bw-link bw-link-focus rounded-lg px-3 py-2 text-sm hover:bg-neutral-100"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Manage Products
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="bw-btn-ghost bw-link-focus mt-1 w-full px-3 py-2 text-left text-sm"
+                    >
+                      Logout
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
@@ -112,37 +108,69 @@ export default function Navbar() {
       </div>
 
       {menuOpen && (
-        <div className="md:hidden px-6 pb-4 flex flex-col gap-4">
-          <Link href="/">Home</Link>
-          <Link href="/items">Products</Link>
-          <Link href="/about">About</Link>
-          <Link href="/dashboard">Dashboard</Link>
-
-          {!user ? (
+        <div className="fade-in border-t border-neutral-200 bg-white px-4 pb-4 md:hidden sm:px-6">
+          <div className="grid gap-2 pt-3">
             <Link
-              href="/login"
-              className="bg-blue-600 text-white py-2 rounded text-center"
+              href="/"
+              className="bw-link bw-link-focus rounded-lg px-2 py-2 text-sm hover:bg-neutral-100"
+              onClick={() => setMenuOpen(false)}
             >
-              Login
+              Home
             </Link>
-          ) : (
-            <>
-              <div className="bg-blue-50 p-3 rounded-lg">
-                <p className="text-sm text-gray-500">Logged in as</p>
-                <p className="font-semibold truncate">{user.email}</p>
-              </div>
+            <Link
+              href="/items"
+              className="bw-link bw-link-focus rounded-lg px-2 py-2 text-sm hover:bg-neutral-100"
+              onClick={() => setMenuOpen(false)}
+            >
+              Products
+            </Link>
+            <Link
+              href="/about"
+              className="bw-link bw-link-focus rounded-lg px-2 py-2 text-sm hover:bg-neutral-100"
+              onClick={() => setMenuOpen(false)}
+            >
+              About
+            </Link>
 
-              <Link href="/items/add">Add Product</Link>
-              <Link href="/items/manage">Manage Products</Link>
-
-              <button
-                onClick={handleLogout}
-                className="bg-red-600 text-white py-2 rounded"
+            {!user ? (
+              <Link
+                href="/login"
+                className="bw-btn bw-link-focus mt-2 px-4 py-2 text-sm"
+                onClick={() => setMenuOpen(false)}
               >
-                Logout
-              </button>
-            </>
-          )}
+                Login
+              </Link>
+            ) : (
+              <>
+                <div className="surface-soft mt-2 rounded-xl p-3">
+                  <p className="text-xs text-neutral-500">Logged in as</p>
+                  <p className="truncate text-sm font-semibold">{user.email}</p>
+                </div>
+
+                <Link
+                  href="/items/add"
+                  className="bw-link bw-link-focus rounded-lg px-2 py-2 text-sm hover:bg-neutral-100"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Add Product
+                </Link>
+                <Link
+                  href="/items/manage"
+                  className="bw-link bw-link-focus rounded-lg px-2 py-2 text-sm hover:bg-neutral-100"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Manage Products
+                </Link>
+
+                <button
+                  onClick={handleLogout}
+                  className="bw-btn-ghost bw-link-focus mt-2 px-4 py-2 text-sm"
+                >
+                  Logout
+                </button>
+              </>
+            )}
+          </div>
         </div>
       )}
     </nav>

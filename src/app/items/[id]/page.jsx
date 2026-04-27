@@ -113,107 +113,112 @@ export default async function ItemDetailsPage({ params }) {
   );
 
   return (
-    <main className="min-h-screen bg-gray-50 px-6 py-10">
-      <section className="max-w-6xl mx-auto">
+    <section className="page-shell">
+      <div className="page-container section-stack">
         <Link
           href="/items"
-          className="inline-flex mb-8 text-blue-600 hover:text-blue-800 font-medium"
+          className="bw-link bw-link-focus inline-flex text-sm font-medium"
         >
-          ← Back to Items
+          Back to Items
         </Link>
 
-        <div className="grid lg:grid-cols-2 gap-10 bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <article className="surface-card grid gap-8 p-6 sm:p-8 lg:grid-cols-2">
           <div className="flex items-center justify-center bg-blue-50 rounded-2xl min-h-[320px]">
             <span className="text-9xl">{item.image}</span>
           </div>
 
           <div>
-            <span className="inline-block mb-4 rounded-full bg-blue-100 px-4 py-1 text-sm font-medium text-blue-700">
-              {item.category}
-            </span>
+            <span className="bw-badge">{item.category}</span>
 
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              {item.title}
-            </h1>
+            <h1 className="title-lg mt-4">{item.title}</h1>
+            <p className="mt-4 text-sm leading-7 text-neutral-600">
+              {item.description}
+            </p>
 
-            <p className="text-gray-600 leading-7 mb-6">{item.description}</p>
-
-            <div className="grid sm:grid-cols-3 gap-4 mb-8">
-              <div className="rounded-xl bg-gray-50 p-4">
-                <p className="text-sm text-gray-500">Price</p>
-                <p className="text-xl font-bold text-blue-600">${item.price}</p>
-              </div>
-
-              <div className="rounded-xl bg-gray-50 p-4">
-                <p className="text-sm text-gray-500">Rating</p>
-                <p className="text-xl font-bold text-yellow-600">
-                  ⭐ {item.rating}
+            <div className="mt-6 grid gap-3 sm:grid-cols-3">
+              <div className="surface-soft p-4">
+                <p className="text-xs uppercase tracking-wide text-neutral-500">
+                  Price
+                </p>
+                <p className="mt-1 text-lg font-semibold text-neutral-900">
+                  ${item.price}
                 </p>
               </div>
 
-              <div className="rounded-xl bg-gray-50 p-4">
-                <p className="text-sm text-gray-500">Status</p>
-                <p className="text-xl font-bold text-green-600">Available</p>
+              <div className="surface-soft p-4">
+                <p className="text-xs uppercase tracking-wide text-neutral-500">
+                  Rating
+                </p>
+                <p className="mt-1 text-lg font-semibold text-neutral-900">
+                  {item.rating}/5
+                </p>
+              </div>
+
+              <div className="surface-soft p-4">
+                <p className="text-xs uppercase tracking-wide text-neutral-500">
+                  Status
+                </p>
+                <p className="mt-1 text-lg font-semibold text-neutral-900">
+                  Available
+                </p>
               </div>
             </div>
 
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
+            <h2 className="mt-8 text-xl font-semibold text-neutral-900">
               Specifications
             </h2>
 
-            <ul className="grid sm:grid-cols-2 gap-3">
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
               {item.specs.map((spec) => (
                 <li
                   key={spec}
-                  className="rounded-xl border border-gray-200 px-4 py-3 text-gray-700"
+                  className="rounded-lg border border-neutral-200 px-4 py-2 text-sm text-neutral-700"
                 >
-                  ✓ {spec}
+                  {spec}
                 </li>
               ))}
             </ul>
           </div>
-        </div>
+        </article>
 
         {relatedItems.length > 0 && (
-          <div className="mt-14">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
-              Related Items
-            </h2>
+          <section>
+            <h2 className="title-lg mb-4">Related Items</h2>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {relatedItems.map((related) => (
-                <div
+                <article
                   key={related.id}
-                  className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition"
+                  className="surface-card hover-lift p-5"
                 >
                   <div className="text-5xl mb-4">{related.image}</div>
 
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">
+                  <h3 className="text-lg font-semibold text-neutral-900">
                     {related.title}
                   </h3>
 
-                  <p className="text-gray-600 text-sm mb-4">
+                  <p className="mt-2 text-sm leading-6 text-neutral-600">
                     {related.description.slice(0, 80)}...
                   </p>
 
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-blue-600">
+                  <div className="mt-4 flex items-center justify-between">
+                    <span className="text-base font-semibold text-neutral-900">
                       ${related.price}
                     </span>
 
                     <Link
                       href={`/items/${related.id}`}
-                      className="rounded-xl bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700 transition"
+                      className="bw-btn bw-link-focus px-4 py-2 text-xs"
                     >
                       View Details
                     </Link>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
-          </div>
+          </section>
         )}
-      </section>
-    </main>
+      </div>
+    </section>
   );
 }

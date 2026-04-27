@@ -9,6 +9,7 @@ export default function AddItemPage() {
   const { user, loading } = useAuth();
 
   const [success, setSuccess] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     shortDescription: "",
@@ -27,9 +28,9 @@ export default function AddItemPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-600">Checking authentication...</p>
-      </main>
+      <section className="page-shell flex items-center justify-center">
+        <p className="text-sm text-neutral-600">Checking authentication...</p>
+      </section>
     );
   }
 
@@ -44,8 +45,26 @@ export default function AddItemPage() {
     }));
   };
 
+  const priceError =
+    formData.price.length > 0 && Number(formData.price) <= 0
+      ? "Price must be greater than 0."
+      : "";
+
+  const imageUrlError =
+    formData.imageUrl.length > 0 && !/^https?:\/\//.test(formData.imageUrl)
+      ? "Image URL should start with http:// or https://"
+      : "";
+
+  const hasInlineErrors = Boolean(priceError || imageUrlError);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (hasInlineErrors) {
+      return;
+    }
+
+    setSubmitting(true);
 
     const newItem = {
       id: Date.now(),
@@ -56,7 +75,7 @@ export default function AddItemPage() {
     const existingItems = JSON.parse(localStorage.getItem("items")) || [];
     localStorage.setItem("items", JSON.stringify([...existingItems, newItem]));
 
-    setSuccess("Item added successfully!");
+    setSuccess("Item added successfully.");
 
     setFormData({
       title: "",
@@ -71,146 +90,143 @@ export default function AddItemPage() {
     setTimeout(() => {
       setSuccess("");
     }, 3000);
+
+    setSubmitting(false);
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 px-6 py-12">
-      <section className="max-w-3xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-        <div className="mb-8">
-          <p className="text-blue-600 font-semibold mb-2">Protected Page</p>
-          <h1 className="text-3xl font-bold text-gray-900">Add New Item</h1>
-          <p className="text-gray-600 mt-2">
-            Only logged-in users can add new products.
-          </p>
-        </div>
+    <section className="page-shell">
+      <div className="page-container">
+        <div className="surface-card fade-in mx-auto max-w-3xl p-6 sm:p-8">
+          <header className="mb-7">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500">
+              Protected Page
+            </p>
+            <h1 className="title-lg mt-2">Add New Item</h1>
+            <p className="mt-2 text-sm text-neutral-600">
+              Only logged-in users can add new products.
+            </p>
+          </header>
 
-        {success && (
-          <div className="mb-6 rounded-xl bg-green-50 border border-green-200 px-4 py-3 text-green-700">
-            {success}
-          </div>
-        )}
+          {success && (
+            <p className="mb-5 rounded-lg border border-neutral-300 bg-neutral-100 px-4 py-2 text-sm text-neutral-700">
+              {success}
+            </p>
+          )}
 
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-5"
-        >
-          <div>
-            <label className="block mb-2 font-medium text-gray-700">
-              Title
-            </label>
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              required
-              placeholder="Enter product title"
-              className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-600"
-            />
-          </div>
-
-          <div>
-            <label className="block mb-2 font-medium text-gray-700">
-              Short Description
-            </label>
-            <input
-              type="text"
-              name="shortDescription"
-              value={formData.shortDescription}
-              onChange={handleChange}
-              required
-              placeholder="Short product summary"
-              className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-600"
-            />
-          </div>
-
-          <div>
-            <label className="block mb-2 font-medium text-gray-700">
-              Full Description
-            </label>
-            <textarea
-              name="fullDescription"
-              value={formData.fullDescription}
-              onChange={handleChange}
-              required
-              rows="5"
-              placeholder="Write full product description"
-              className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-600 resize-none"
-            ></textarea>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-5">
-            <div>
-              <label className="block mb-2 font-medium text-gray-700">
-                Category
-              </label>
-              <select
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                required
-                className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-600"
-              >
-                <option value="">Select category</option>
-                <option value="Electronics">Electronics</option>
-                <option value="Fashion">Fashion</option>
-                <option value="Home">Home</option>
-                <option value="Accessories">Accessories</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block mb-2 font-medium text-gray-700">
-                Price
-              </label>
-              <input
-                type="number"
-                name="price"
-                value={formData.price}
-                onChange={handleChange}
-                required
-                placeholder="99"
-                className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-600"
-              />
-            </div>
-
-            <div>
-              <label className="block mb-2 font-medium text-gray-700">
-                Date
-              </label>
-              <input
-                type="date"
-                name="date"
-                value={formData.date}
-                onChange={handleChange}
-                required
-                className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-600"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="block mb-2 font-medium text-gray-700">
-              Image URL <span className="text-gray-400">(optional)</span>
-            </label>
-            <input
-              type="url"
-              name="imageUrl"
-              value={formData.imageUrl}
-              onChange={handleChange}
-              placeholder="https://example.com/product.jpg"
-              className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-600"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 transition"
+          <form
+            onSubmit={handleSubmit}
+            className="grid gap-4"
           >
-            Submit Item
-          </button>
-        </form>
-      </section>
-    </main>
+            <div>
+              <label className="mb-1.5 block text-sm font-medium">Title</label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                required
+                placeholder="Enter product title"
+                className="bw-input"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1.5 block text-sm font-medium">Short Description</label>
+              <input
+                type="text"
+                name="shortDescription"
+                value={formData.shortDescription}
+                onChange={handleChange}
+                required
+                placeholder="Short product summary"
+                className="bw-input"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1.5 block text-sm font-medium">Full Description</label>
+              <textarea
+                name="fullDescription"
+                value={formData.fullDescription}
+                onChange={handleChange}
+                required
+                rows="5"
+                placeholder="Write full product description"
+                className="bw-textarea"
+              ></textarea>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-3">
+              <div>
+                <label className="mb-1.5 block text-sm font-medium">Category</label>
+                <select
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  required
+                  className="bw-select"
+                >
+                  <option value="">Select category</option>
+                  <option value="Electronics">Electronics</option>
+                  <option value="Fashion">Fashion</option>
+                  <option value="Home">Home</option>
+                  <option value="Accessories">Accessories</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="mb-1.5 block text-sm font-medium">Price</label>
+                <input
+                  type="number"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleChange}
+                  required
+                  placeholder="99"
+                  className="bw-input"
+                />
+                {priceError && <p className="mt-1 text-xs text-neutral-600">{priceError}</p>}
+              </div>
+
+              <div>
+                <label className="mb-1.5 block text-sm font-medium">Date</label>
+                <input
+                  type="date"
+                  name="date"
+                  value={formData.date}
+                  onChange={handleChange}
+                  required
+                  className="bw-input"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="mb-1.5 block text-sm font-medium">Image URL (optional)</label>
+              <input
+                type="url"
+                name="imageUrl"
+                value={formData.imageUrl}
+                onChange={handleChange}
+                placeholder="https://example.com/product.jpg"
+                className="bw-input"
+              />
+              {imageUrlError && (
+                <p className="mt-1 text-xs text-neutral-600">{imageUrlError}</p>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              disabled={submitting || hasInlineErrors}
+              className="bw-btn bw-link-focus w-full px-4 py-3 text-sm disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {submitting ? "Saving..." : "Submit Item"}
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
   );
 }

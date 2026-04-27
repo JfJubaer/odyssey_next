@@ -41,59 +41,55 @@ const products = [
 
 export default function FeaturedProducts() {
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-12">
-          <p className="text-blue-600 font-semibold mb-2">
+    <section className="page-shell pt-1 sm:pt-2">
+      <div className="page-container section-stack">
+        <div className="text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-500">
             Featured Collection
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Popular Products
-          </h2>
+          <h2 className="title-lg mt-2">Popular Products</h2>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {products.map((product) => (
-            <div
+            <article
               key={product.id}
-              className="group rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition"
+              className="surface-card hover-lift fade-in overflow-hidden"
             >
               <div className="h-48 flex items-center justify-center bg-blue-50 text-7xl">
                 {product.image}
               </div>
 
-              <div className="p-5">
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-xs font-medium bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
-                    {product.category}
-                  </span>
-                  <span className="text-sm text-yellow-600">
-                    ⭐ {product.rating}
+              <div className="grid gap-3 p-5">
+                <div className="flex items-center justify-between">
+                  <span className="bw-badge">{product.category}</span>
+                  <span className="text-xs font-medium text-neutral-600">
+                    {product.rating}/5
                   </span>
                 </div>
 
-                <h3 className="font-bold text-lg mb-2 text-gray-900">
+                <h3 className="text-lg font-semibold text-neutral-900">
                   {product.title}
                 </h3>
 
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                <p className="text-sm leading-6 text-neutral-600">
                   {product.description}
                 </p>
 
-                <div className="flex items-center justify-between">
-                  <p className="text-xl font-bold text-blue-600">
+                <div className="mt-1 flex items-center justify-between gap-3">
+                  <p className="text-lg font-bold text-neutral-900">
                     ${product.price}
                   </p>
 
                   <Link
                     href={`/items/${product.id}`}
-                    className="rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 transition"
+                    className="bw-btn bw-link-focus px-4 py-2 text-xs"
                   >
                     View Details
                   </Link>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

@@ -82,31 +82,28 @@ export default function ItemsPage() {
   });
 
   return (
-    <main className="min-h-screen bg-gray-50 px-6 py-10">
-      <section className="max-w-7xl mx-auto">
-        <div className="mb-10 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Browse Items
-          </h1>
-          <p className="mt-3 text-gray-600">
+    <section className="page-shell">
+      <div className="page-container section-stack">
+        <header className="text-center">
+          <h1 className="title-xl">Browse Items</h1>
+          <p className="mt-3 text-sm text-neutral-600 sm:text-base">
             Search and filter products by category and price range.
           </p>
-        </div>
+        </header>
 
-        {/* Search + Filters */}
-        <div className="mb-10 grid gap-4 md:grid-cols-3 bg-white p-5 rounded-2xl shadow-sm">
+        <div className="surface-card grid gap-3 p-4 md:grid-cols-3 md:p-5">
           <input
             type="text"
-            placeholder="Search items..."
+            placeholder="Search items"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-600"
+            className="bw-input"
           />
 
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-600"
+            className="bw-select"
           >
             <option value="All">All Categories</option>
             <option value="Electronics">Electronics</option>
@@ -117,7 +114,7 @@ export default function ItemsPage() {
           <select
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-blue-600"
+            className="bw-select"
           >
             <option value="All">All Prices</option>
             <option value="low">Below $60</option>
@@ -126,50 +123,53 @@ export default function ItemsPage() {
           </select>
         </div>
 
-        {/* Items Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {filteredItems.map((item) => (
-            <div
+            <article
               key={item.id}
-              className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition"
+              className="surface-card hover-lift flex flex-col justify-between p-6"
             >
-              <div className="text-5xl mb-5">{item.image}</div>
+              <div>
+                <div className="text-5xl mb-5">{item.image}</div>
 
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-sm bg-blue-50 text-blue-700 px-3 py-1 rounded-full">
-                  {item.category}
-                </span>
-                <span className="text-sm text-yellow-600">
-                  ⭐ {item.rating}
-                </span>
+                <div className="mb-3 flex items-center justify-between">
+                  <span className="bw-badge">{item.category}</span>
+                  <span className="text-xs font-medium text-neutral-600">
+                    {item.rating}/5
+                  </span>
+                </div>
+
+                <h2 className="text-xl font-semibold text-neutral-900">
+                  {item.title}
+                </h2>
+
+                <p className="mt-2 text-sm leading-6 text-neutral-600">
+                  {item.description}
+                </p>
               </div>
 
-              <h2 className="text-xl font-bold text-gray-900 mb-2">
-                {item.title}
-              </h2>
-
-              <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                {item.description}
-              </p>
-
-              <div className="flex items-center justify-between">
-                <p className="text-lg font-bold text-blue-600">${item.price}</p>
+              <div className="mt-5 flex items-center justify-between">
+                <p className="text-lg font-bold text-neutral-900">
+                  ${item.price}
+                </p>
 
                 <Link
-                  href={`/items/${item?.id}`}
-                  className="rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 transition"
+                  href={`/items/${item.id}`}
+                  className="bw-btn bw-link-focus px-4 py-2 text-sm"
                 >
                   View Details
                 </Link>
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
         {filteredItems.length === 0 && (
-          <div className="mt-12 text-center text-gray-500">No items found.</div>
+          <div className="surface-soft p-8 text-center text-sm text-neutral-600">
+            No items found.
+          </div>
         )}
-      </section>
-    </main>
+      </div>
+    </section>
   );
 }

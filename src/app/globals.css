@@ -1,1 +1,198 @@
 @import "tailwindcss";
+
+:root {
+  --bw-bg: #ffffff;
+  --bw-fg: #111111;
+  --bw-muted: #525252;
+  --bw-subtle: #737373;
+  --bw-border: #d4d4d4;
+  --bw-border-strong: #a3a3a3;
+  --bw-surface: #fafafa;
+  --bw-surface-strong: #f5f5f5;
+}
+
+html,
+body {
+  background: var(--bw-bg);
+  color: var(--bw-fg);
+}
+
+body {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+.page-shell {
+  min-height: calc(100vh - 128px);
+  padding: 2rem 1rem;
+  background: var(--bw-bg);
+}
+
+.page-container {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.section-stack {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.title-xl {
+  font-size: clamp(1.875rem, 3vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.title-lg {
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+.text-muted {
+  color: var(--bw-muted);
+}
+
+.surface-card {
+  background: var(--bw-bg);
+  border: 1px solid var(--bw-border);
+  border-radius: 1rem;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
+}
+
+.surface-soft {
+  background: var(--bw-surface);
+  border: 1px solid var(--bw-border);
+  border-radius: 1rem;
+}
+
+.hover-lift {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  border-color: var(--bw-border-strong);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.08);
+}
+
+.bw-link {
+  color: var(--bw-fg);
+  transition: opacity 0.2s ease;
+}
+
+.bw-link:hover {
+  opacity: 0.68;
+}
+
+.bw-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  border: 1px solid #111111;
+  background: #111111;
+  color: #ffffff;
+  font-weight: 600;
+  transition:
+    transform 0.16s ease,
+    opacity 0.16s ease,
+    box-shadow 0.2s ease;
+}
+
+.bw-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.bw-btn:focus-visible,
+.bw-input:focus-visible,
+.bw-select:focus-visible,
+.bw-textarea:focus-visible,
+.bw-link-focus:focus-visible {
+  outline: 2px solid #111111;
+  outline-offset: 2px;
+}
+
+.bw-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  border: 1px solid var(--bw-border);
+  background: #ffffff;
+  color: #111111;
+  font-weight: 600;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.bw-btn-ghost:hover {
+  background: var(--bw-surface);
+  border-color: var(--bw-border-strong);
+}
+
+.bw-input,
+.bw-select,
+.bw-textarea {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--bw-border);
+  background: #ffffff;
+  color: #111111;
+  padding: 0.75rem 0.875rem;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.bw-input::placeholder,
+.bw-textarea::placeholder {
+  color: var(--bw-subtle);
+}
+
+.bw-input:hover,
+.bw-select:hover,
+.bw-textarea:hover {
+  border-color: var(--bw-border-strong);
+}
+
+.bw-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--bw-border);
+  background: var(--bw-surface);
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #222222;
+}
+
+.fade-in {
+  animation: fadeInUp 0.4s ease-out both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .page-shell {
+    padding: 2.5rem 1.5rem;
+  }
+}

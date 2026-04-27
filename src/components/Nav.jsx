@@ -36,7 +36,7 @@ export default function Navbar() {
             href="/items"
             className="hover:text-blue-600 transition"
           >
-            Items
+            Products
           </Link>
           <Link
             href="/about"
@@ -65,9 +65,9 @@ export default function Navbar() {
                 className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100"
               >
                 <span className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center">
-                  {user.displayName?.charAt(0).toUpperCase()}
+                  {user.email?.charAt(0).toUpperCase()}
                 </span>
-                <span>{user.displayName}</span>
+                <span>{user.email}</span>
               </button>
 
               {dropdownOpen && (
@@ -78,14 +78,14 @@ export default function Navbar() {
                   </p>
 
                   <Link
-                    href="/add-product"
+                    href="/items/add"
                     className="block px-3 py-2 rounded-lg hover:bg-gray-100"
                   >
                     Add Product
                   </Link>
 
                   <Link
-                    href="/manage-products"
+                    href="/items/manage"
                     className="block px-3 py-2 rounded-lg hover:bg-gray-100"
                   >
                     Manage Products
@@ -114,7 +114,7 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden px-6 pb-4 flex flex-col gap-4">
           <Link href="/">Home</Link>
-          <Link href="/items">Items</Link>
+          <Link href="/items">Products</Link>
           <Link href="/about">About</Link>
           <Link href="/dashboard">Dashboard</Link>
 
@@ -129,11 +129,11 @@ export default function Navbar() {
             <>
               <div className="bg-blue-50 p-3 rounded-lg">
                 <p className="text-sm text-gray-500">Logged in as</p>
-                <p className="font-semibold truncate">{user.displayName}</p>
+                <p className="font-semibold truncate">{user.email}</p>
               </div>
 
-              <Link href="/add-product">Add Product</Link>
-              <Link href="/manage-products">Manage Products</Link>
+              <Link href="/items/add">Add Product</Link>
+              <Link href="/items/manage">Manage Products</Link>
 
               <button
                 onClick={handleLogout}

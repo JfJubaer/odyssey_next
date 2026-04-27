@@ -21,10 +21,10 @@ export default function Navbar() {
             Home
           </Link>
           <Link
-            href="/products"
+            href="/items"
             className="hover:text-blue-600 transition"
           >
-            Products
+            Items
           </Link>
           <Link
             href="/about"
@@ -57,7 +57,7 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden px-6 pb-4 flex flex-col gap-4">
           <Link href="/">Home</Link>
-          <Link href="/products">Products</Link>
+          <Link href="/items">Items</Link>
           <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>
           <button className="bg-blue-600 text-white py-2 rounded">Login</button>

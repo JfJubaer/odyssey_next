@@ -20,7 +20,7 @@ export default function ItemDetailsPage() {
         <div className="page-container">
           <div className="surface-soft p-10 text-center">
             <h1 className="title-lg">Item not found</h1>
-            <p className="mt-3 text-sm text-neutral-600">
+            <p className="ui-muted mt-3 text-sm">
               The item you are looking for does not exist.
             </p>
             <Link
@@ -56,7 +56,7 @@ export default function ItemDetailsPage() {
         </Link>
 
         <article className="surface-card grid gap-8 p-6 sm:p-8 lg:grid-cols-2">
-          <div className="surface-soft flex min-h-[280px] items-center justify-center px-4 text-center text-lg font-semibold uppercase tracking-[0.14em] text-neutral-600 sm:min-h-[360px]">
+          <div className="surface-soft ui-muted flex min-h-[280px] items-center justify-center px-4 text-center text-lg font-semibold uppercase tracking-[0.14em] sm:min-h-[360px]">
             {item.image || "Product"}
           </div>
 
@@ -64,34 +64,34 @@ export default function ItemDetailsPage() {
             <span className="bw-badge">{item.category}</span>
 
             <h1 className="title-lg mt-4">{item.title}</h1>
-            <p className="mt-4 text-sm leading-7 text-neutral-600">{item.description}</p>
+            <p className="ui-muted mt-4 text-sm leading-7">{item.description}</p>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
               <div className="surface-soft p-4">
-                <p className="text-xs uppercase tracking-wide text-neutral-500">Price</p>
-                <p className="mt-1 text-lg font-semibold text-neutral-900">${item.price}</p>
+                <p className="ui-subtle text-xs uppercase tracking-wide">Price</p>
+                <p className="ui-strong mt-1 text-lg font-semibold">${item.price}</p>
               </div>
 
               <div className="surface-soft p-4">
-                <p className="text-xs uppercase tracking-wide text-neutral-500">Rating</p>
-                <p className="mt-1 text-lg font-semibold text-neutral-900">
+                <p className="ui-subtle text-xs uppercase tracking-wide">Rating</p>
+                <p className="ui-strong mt-1 text-lg font-semibold">
                   {item.rating ?? "N/A"}/5
                 </p>
               </div>
 
               <div className="surface-soft p-4">
-                <p className="text-xs uppercase tracking-wide text-neutral-500">Status</p>
-                <p className="mt-1 text-lg font-semibold text-neutral-900">Available</p>
+                <p className="ui-subtle text-xs uppercase tracking-wide">Status</p>
+                <p className="ui-strong mt-1 text-lg font-semibold">Available</p>
               </div>
             </div>
 
-            <h2 className="mt-8 text-xl font-semibold text-neutral-900">Specifications</h2>
+            <h2 className="ui-strong mt-8 text-xl font-semibold">Specifications</h2>
 
             <ul className="mt-4 grid gap-2 sm:grid-cols-2">
               {specs.map((spec) => (
                 <li
                   key={spec}
-                  className="rounded-lg border border-neutral-200 px-4 py-2 text-sm text-neutral-700"
+                  className="ui-border ui-muted rounded-lg border px-4 py-2 text-sm"
                 >
                   {spec}
                 </li>
@@ -112,14 +112,14 @@ export default function ItemDetailsPage() {
                 >
                   <div className="text-5xl mb-4">{related.image || "Product"}</div>
 
-                  <h3 className="text-lg font-semibold text-neutral-900">{related.title}</h3>
+                  <h3 className="ui-strong text-lg font-semibold">{related.title}</h3>
 
-                  <p className="mt-2 text-sm leading-6 text-neutral-600">
+                  <p className="ui-muted mt-2 text-sm leading-6">
                     {related.description.slice(0, 80)}...
                   </p>
 
                   <div className="mt-4 flex items-center justify-between">
-                    <span className="text-base font-semibold text-neutral-900">
+                    <span className="ui-strong text-base font-semibold">
                       ${related.price}
                     </span>
 

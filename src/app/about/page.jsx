@@ -6,7 +6,7 @@ export default function AboutPage() {
       <div className="page-container section-stack">
         <header className="mx-auto max-w-3xl text-center">
           <h1 className="title-xl">About Zero Shop</h1>
-          <p className="mt-4 text-base leading-7 text-neutral-600">
+          <p className="ui-muted mt-4 text-base leading-7">
             Zero Shop is a modern e-commerce demo built with Next.js and
             Firebase authentication. The experience focuses on clean structure,
             responsive behavior, and consistent interaction patterns.
@@ -14,7 +14,7 @@ export default function AboutPage() {
         </header>
 
         <div className="surface-card grid items-center gap-8 p-6 sm:p-8 md:grid-cols-2">
-          <div className="overflow-hidden rounded-xl border border-neutral-200">
+          <div className="ui-border overflow-hidden rounded-xl border">
             <Image
               src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a"
               alt="Ecommerce shopping"
@@ -26,16 +26,16 @@ export default function AboutPage() {
 
           <div className="space-y-4">
             <h2 className="title-lg">Our Mission</h2>
-            <p className="text-sm leading-7 text-neutral-600">
+            <p className="ui-muted text-sm leading-7">
               We aim to deliver a smooth shopping flow where users can browse,
               filter, and inspect products without visual clutter.
             </p>
-            <p className="text-sm leading-7 text-neutral-600">
+            <p className="ui-muted text-sm leading-7">
               The stack combines Next.js App Router for structure, Tailwind CSS
               for maintainable styling, and Firebase Authentication for secure
               user sessions.
             </p>
-            <p className="text-sm leading-7 text-neutral-600">
+            <p className="ui-muted text-sm leading-7">
               This project emphasizes accessibility, reliable responsive
               layouts, and a simple black-and-white interface system.
             </p>
@@ -45,7 +45,7 @@ export default function AboutPage() {
         <div className="grid gap-5 md:grid-cols-3">
           <article className="surface-card hover-lift p-6">
             <h3 className="text-lg font-semibold">Consistent UI</h3>
-            <p className="mt-2 text-sm leading-6 text-neutral-600">
+            <p className="ui-muted mt-2 text-sm leading-6">
               Shared tokens and reusable classes keep spacing, typography, and
               controls uniform.
             </p>
@@ -53,7 +53,7 @@ export default function AboutPage() {
 
           <article className="surface-card hover-lift p-6">
             <h3 className="text-lg font-semibold">Dynamic Routing</h3>
-            <p className="mt-2 text-sm leading-6 text-neutral-600">
+            <p className="ui-muted mt-2 text-sm leading-6">
               Product details use dynamic routes with server rendering for clear
               and scalable page structure.
             </p>
@@ -61,7 +61,7 @@ export default function AboutPage() {
 
           <article className="surface-card hover-lift p-6">
             <h3 className="text-lg font-semibold">Authentication</h3>
-            <p className="mt-2 text-sm leading-6 text-neutral-600">
+            <p className="ui-muted mt-2 text-sm leading-6">
               Protected workflows for adding and managing products are handled
               through Firebase Auth.
             </p>

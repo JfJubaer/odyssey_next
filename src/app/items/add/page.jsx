@@ -34,7 +34,7 @@ export default function AddItemPage() {
   if (loading) {
     return (
       <section className="page-shell flex items-center justify-center">
-        <p className="text-sm text-neutral-600">Checking authentication...</p>
+        <p className="ui-muted text-sm">Checking authentication...</p>
       </section>
     );
   }
@@ -110,17 +110,17 @@ export default function AddItemPage() {
       <div className="page-container">
         <div className="surface-card fade-in mx-auto max-w-3xl p-6 sm:p-8">
           <header className="mb-7">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500">
+            <p className="ui-subtle text-xs font-semibold uppercase tracking-[0.16em]">
               Protected Page
             </p>
             <h1 className="title-lg mt-2">Add New Item</h1>
-            <p className="mt-2 text-sm text-neutral-600">
+            <p className="ui-muted mt-2 text-sm">
               Only logged-in users can add new products.
             </p>
           </header>
 
           {success && (
-            <p className="mb-5 rounded-lg border border-neutral-300 bg-neutral-100 px-4 py-2 text-sm text-neutral-700">
+            <p className="ui-success mb-5 rounded-lg px-4 py-2 text-sm">
               {success}
             </p>
           )}
@@ -186,7 +186,7 @@ export default function AddItemPage() {
                   placeholder="99"
                   className="bw-input"
                 />
-                {priceError && <p className="mt-1 text-xs text-neutral-600">{priceError}</p>}
+                {priceError && <p className="ui-muted mt-1 text-xs">{priceError}</p>}
               </div>
 
               <div>
@@ -203,7 +203,7 @@ export default function AddItemPage() {
                   className="bw-input"
                 />
                 {ratingError && (
-                  <p className="mt-1 text-xs text-neutral-600">{ratingError}</p>
+                  <p className="ui-muted mt-1 text-xs">{ratingError}</p>
                 )}
               </div>
             </div>
@@ -221,7 +221,7 @@ export default function AddItemPage() {
                 className="bw-input"
               />
               {imageError && (
-                <p className="mt-1 text-xs text-neutral-600">{imageError}</p>
+                <p className="ui-muted mt-1 text-xs">{imageError}</p>
               )}
             </div>
 

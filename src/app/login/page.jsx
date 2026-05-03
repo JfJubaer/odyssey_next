@@ -73,13 +73,13 @@ export default function LoginPage() {
       <div className="surface-card fade-in w-full max-w-md p-8">
         <header className="mb-6 text-center">
           <h1 className="title-lg">{isRegister ? "Create Account" : "Welcome Back"}</h1>
-          <p className="mt-2 text-sm text-neutral-600">
+          <p className="ui-muted mt-2 text-sm">
             {isRegister ? "Register to continue." : "Log in to your account."}
           </p>
         </header>
 
         {formError && (
-          <p className="mb-4 rounded-lg border border-neutral-300 bg-neutral-100 px-3 py-2 text-sm text-neutral-700">
+          <p className="ui-danger mb-4 rounded-lg px-3 py-2 text-sm">
             {formError}
           </p>
         )}
@@ -91,7 +91,7 @@ export default function LoginPage() {
           <div>
             <label
               htmlFor="email"
-              className="mb-1.5 block text-sm font-medium text-neutral-800"
+              className="ui-strong mb-1.5 block text-sm font-medium"
             >
               Email
             </label>
@@ -104,13 +104,13 @@ export default function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            {emailError && <p className="mt-1 text-xs text-neutral-600">{emailError}</p>}
+            {emailError && <p className="ui-muted mt-1 text-xs">{emailError}</p>}
           </div>
 
           <div>
             <label
               htmlFor="password"
-              className="mb-1.5 block text-sm font-medium text-neutral-800"
+              className="ui-strong mb-1.5 block text-sm font-medium"
             >
               Password
             </label>
@@ -124,7 +124,7 @@ export default function LoginPage() {
               required
             />
             {passwordError && (
-              <p className="mt-1 text-xs text-neutral-600">{passwordError}</p>
+              <p className="ui-muted mt-1 text-xs">{passwordError}</p>
             )}
           </div>
 
@@ -151,7 +151,7 @@ export default function LoginPage() {
           {googleSubmitting ? "Signing in with Google..." : "Continue with Google"}
         </button>
 
-        <p className="mt-5 text-center text-sm text-neutral-600">
+        <p className="ui-muted mt-5 text-center text-sm">
           {isRegister ? "Already have an account?" : "Do not have an account?"}{" "}
           <button
             onClick={() => {

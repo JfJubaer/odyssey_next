@@ -22,7 +22,7 @@ export default function Navbar() {
           href="/"
           className="bw-link bw-link-focus text-xl font-bold tracking-tight"
         >
-          ShopNest
+          Zero Shop
         </Link>
 
         <div className="hidden items-center gap-6 md:flex">

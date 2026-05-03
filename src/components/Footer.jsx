@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="border-t border-neutral-200 bg-neutral-50 py-10">
       <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-3">
         <div>
-          <h2 className="text-lg font-bold text-neutral-900">ShopNest</h2>
+          <h2 className="text-lg font-bold text-neutral-900">Zero Shop</h2>
           <p className="mt-3 text-sm leading-6 text-neutral-600">
             A clean shopping experience focused on speed, clarity, and secure
             sign-in.
@@ -65,7 +65,7 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto mt-8 w-full max-w-7xl border-t border-neutral-200 px-4 pt-6 text-center text-xs text-neutral-500 sm:px-6">
-        Copyright 2026 ShopNest. All rights reserved.
+        Copyright 2026 Zero Shop. All rights reserved.
       </div>
     </footer>
   );

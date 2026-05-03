@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "ShopNest",
+  title: "Zero Shop",
   description: "E-commerce app with Firebase authentication",
 };
 

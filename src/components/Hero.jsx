@@ -6,7 +6,7 @@ export default function Hero() {
       <div className="page-container">
         <div className="surface-soft fade-in mx-auto max-w-4xl px-6 py-14 text-center sm:px-10">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">
-            ShopNest Collection
+            Zero Shop Collection
           </p>
           <h1 className="title-xl">Discover Essential Products</h1>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-neutral-600 sm:text-lg">

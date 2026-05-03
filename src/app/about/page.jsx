@@ -5,10 +5,10 @@ export default function AboutPage() {
     <section className="page-shell">
       <div className="page-container section-stack">
         <header className="mx-auto max-w-3xl text-center">
-          <h1 className="title-xl">About ShopNest</h1>
+          <h1 className="title-xl">About Zero Shop</h1>
           <p className="mt-4 text-base leading-7 text-neutral-600">
-            ShopNest is a modern e-commerce demo built with Next.js and Firebase
-            authentication. The experience focuses on clean structure,
+            Zero Shop is a modern e-commerce demo built with Next.js and
+            Firebase authentication. The experience focuses on clean structure,
             responsive behavior, and consistent interaction patterns.
           </p>
         </header>
@@ -36,8 +36,8 @@ export default function AboutPage() {
               user sessions.
             </p>
             <p className="text-sm leading-7 text-neutral-600">
-              This project emphasizes accessibility, reliable responsive layouts,
-              and a simple black-and-white interface system.
+              This project emphasizes accessibility, reliable responsive
+              layouts, and a simple black-and-white interface system.
             </p>
           </div>
         </div>

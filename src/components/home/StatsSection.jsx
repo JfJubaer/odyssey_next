@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { getLocalProducts, getMergedProducts } from "@/lib/products";
 
 function StatCard({ label, value, detail }) {
@@ -14,14 +14,24 @@ function StatCard({ label, value, detail }) {
 }
 
 export default function StatsSection() {
-  const [localProducts] = useState(() => getLocalProducts());
-  const items = useMemo(() => getMergedProducts(localProducts), [localProducts]);
+  const [localProducts, setLocalProducts] = useState([]);
+  const items = useMemo(
+    () => getMergedProducts(localProducts),
+    [localProducts],
+  );
+
+  useEffect(() => {
+    setLocalProducts(getLocalProducts());
+  }, []);
 
   const stats = useMemo(() => {
     const categories = new Set(items.map((item) => item.category));
     const avgRating =
       items.length > 0
-        ? (items.reduce((sum, item) => sum + Number(item.rating || 0), 0) / items.length).toFixed(1)
+        ? (
+            items.reduce((sum, item) => sum + Number(item.rating || 0), 0) /
+            items.length
+          ).toFixed(1)
         : "0.0";
 
     return [
@@ -52,17 +62,21 @@ export default function StatsSection() {
     <section className="section-shell pt-2">
       <div className="page-container section-stack">
         <header className="text-center">
-          <p className="ui-subtle text-xs font-semibold uppercase tracking-[0.18em]">Live Stats</p>
+          <p className="ui-subtle text-xs font-semibold uppercase tracking-[0.18em]">
+            Live Stats
+          </p>
           <h2 className="title-lg mt-2">Catalog Signals in Real Time</h2>
         </header>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat) => (
-            <StatCard key={stat.label} {...stat} />
+            <StatCard
+              key={stat.label}
+              {...stat}
+            />
           ))}
         </div>
       </div>
     </section>
   );
 }
-
